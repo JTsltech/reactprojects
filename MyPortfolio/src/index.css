@@ -1,0 +1,115 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+ 
+}
+
+
+.main-container {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1440px;
+  padding: 2rem 1.25rem;
+}
+
+
+.bg-lightGray{
+  background-color: #f6f8fb;
+}
+
+.line-space-1{
+  word-spacing: 1px;
+}
+
+#about button:hover{
+  outline:none;
+  background-color: white !important;
+  color:gray;
+  box-shadow: var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow);
+  transition: cubic-bezier(0.215, 0.610, 0.355, 1) step-end;
+}
+
+.bg-lightblue{
+  background-color: lightblue;
+}
+
+#pageTopBtn {
+  display: block; /* Hidden by default */
+  position: fixed; /* Fixed/sticky position */
+  bottom: 20px; /* Place the button at the bottom of the page */
+  right: 30px; /* Place the button 30px from the right */
+  border: none; /* Remove borders */
+  outline: none; /* Remove outline */
+  color: white; /* Text color */
+  cursor: pointer; /* Add a mouse pointer on hover */
+  padding: 15px; /* Some padding */
+  border-radius: 10px; /* Rounded corners */
+  font-size: 18px; /* Increase font size */
+}
+
+#pageTopBtn:hover {
+  background-color: #555; /* Add a dark-grey background on hover */
+}
+
+
+.icon {
+  display: inline-block;
+  width: 40px;
+  color: blue;
+  font-style: normal;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* .icon.download::before{
+  content:"\"
+} */
