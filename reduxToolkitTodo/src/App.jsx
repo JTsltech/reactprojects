@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 import AddTodo from './components/AddTodos'
-import Todos from './components/Todos'
+import TodoContainer from './components/TodoContainer'
 
 function App() {
 
@@ -9,7 +9,7 @@ function App() {
     <>
       <h1>React Redux Toolkit</h1>
       <AddTodo/>
-      <Todos/>
+      <TodoContainer/>
     </>
   )
 }

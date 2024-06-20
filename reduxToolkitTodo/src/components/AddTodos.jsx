@@ -12,13 +12,13 @@ function AddTodos(){
 
     const addTodoHandler = (e) =>{
         e.preventDefault();
-        dispatch(addTodo({text:input,isEditable:false}))
+        dispatch(addTodo({text:input,isEditable:false,isCompleted:false,isImportant:false,panelName:"Daily Tasks"}))
         setInput("")
     }
 
     const updateTodoHandler = (e) =>{
       e.preventDefault()
-      dispatch(updateTodo({text:input,isEditable:false}))
+      dispatch(updateTodo({text:input,isEditable:false,isCompleted:false}))
       setInput("")
       setIsEdit(false)
     }

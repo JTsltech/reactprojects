@@ -1,27 +1,54 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { removeTodo,setTodo } from "../features/todo/todoSlice";
+import { removeTodo,setTodo,setTodoComplete,setTodoImportant,setPanelName } from "../features/todo/todoSlice";
 
-function Todos({setTodoItem}){
+function Todos({panelName}){
 
     const dispatch = useDispatch()
     const todos = useSelector(state => state.todos)
+
+    const [IsImportant,setIsImportant] = useState(false)
 
     const edit = (todo) =>{
       dispatch(setTodo(todo))
     }
 
+    const toggleCompleted = (todo) =>{
+        dispatch(setTodoComplete(todo))
+    }
+
+    const toggleImportant = (todo) =>{
+      debugger;
+      dispatch(setTodoImportant(todo))  
+      //setIsImportant(!todo.isImportant)    
+    }
+
+    useEffect(()=>{
+      todos.map((todoObj)=>{
+        debugger;
+        if(todoObj.isImportant  == true){
+          dispatch(setPanelName(todoObj))
+        }
+      })
+    },[])
+    
     return (
         <>
-        <div>Todos</div>
-        <ul className="list-none flex flex-wrap gap-y-3">
-            {todos.map((todo) => (
+        {/* <div>Todos</div> */}
+        <ul className="list-none gap-y-3">
+            {todos.filter(todo => todo.panelName == panelName).
+            map((todo) => (
               <li
-                className="mt-4 w-full bg-zinc-800 px-4 py-2 rounded"
+                className="mt-4 w-full flex bg-zinc-800 px-4 py-2 rounded"
                 key={todo.id}
               >
-                <div className='text-white text-left w-full'>{todo.text}</div>
-                <button onClick={() => edit(todo)} className="inline-flex items-center justify-center text-white bg-red-500 border-0 py-1 px-4 focus:outline-none hover:bg-red-600 rounded text-md"
+                <input type="checkbox" 
+                  className="cursor-pointer inline-flex mr-4"
+                  value={todo.isCompleted}
+                  onChange={() => toggleCompleted(todo)}
+                />
+                <div className={`text-white text-left w-full ${todo.isCompleted ? "line-through" : ""}`}>{todo.text}</div>
+                <button onClick={() => edit(todo)} className="inline-flex items-center mr-4 justify-center text-white bg-red-500 border-0 py-1 px-4 focus:outline-none hover:bg-red-600 rounded text-md"
                 >Edit</button>
                 <button
                  onClick={() => dispatch(removeTodo(todo.id))}
@@ -42,6 +69,9 @@ function Todos({setTodoItem}){
                     />
                   </svg>
                 </button>
+                <button className={`text-white inline-flex item-center mt-2 ml-4 cursor-pointer justify-center ${todo.isImportant ? "fa fa-star checked" :"fa fa-star-o "}`}
+                  onClick={() =>toggleImportant(todo)}
+                ></button>
               </li>
             ))}
           </ul>
