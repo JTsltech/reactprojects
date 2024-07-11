@@ -14,9 +14,9 @@ const postSlice = createSlice({
     name:"posts",
     initialState,
     reducers:{
-        createPost:(state,action)=>{
-            state.posts.push(action.payload);
-        }
+        // postAdded:(state,action)=>{
+        //     state.posts.push(action.payload);
+        // }
     },
     extraReducers(builder) {
       builder
@@ -32,16 +32,29 @@ const postSlice = createSlice({
           state.status = 'failed'
           state.error = action.error.message
         })
+        .addCase(createNewPost.fulfilled,(state,action) => {
+            state.posts.push(action.payload)            
+        })
     }
 })
 
 export default postSlice.reducer
 
-export const {createPost} = postSlice.actions
+//export const {postAdded} = postSlice.actions
 
 export const fetchPosts = createAsyncThunk('posts/fetchPosts',
     async () => {
         const response = await appwriteService.getPosts([]);
         return response.documents
+    }
+)
+
+export const createNewPost = createAsyncThunk('posts/createPost',
+    async (initialPost) => {
+        debugger;
+
+        const {title,slug,content,featuredImage,status,userId} = initialPost;
+        const response = await appwriteService.createPost({title,slug,content,featuredImage,status,userId});
+        return response
     }
 )

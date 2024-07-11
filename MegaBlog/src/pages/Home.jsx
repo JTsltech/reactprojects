@@ -8,7 +8,6 @@ function Home() {
     const dispatch = useDispatch();
 
     const postsLst = useSelector(state => state.post.posts);
-    debugger;
     const postStatus = useSelector(state => state.post.status)
 
     useEffect(() => {

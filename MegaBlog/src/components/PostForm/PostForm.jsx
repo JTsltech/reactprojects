@@ -4,7 +4,7 @@ import {Button,Input,Select,RTE} from "../index"
 import service from "../../appwrite/config";
 import { useNavigate } from "react-router-dom";
 import { useSelector,useDispatch } from "react-redux";
-import { createPost } from "../../store/postSlice";
+import { createNewPost} from "../../store/postSlice";
 
 function PostForm({post}){
     
@@ -19,7 +19,7 @@ function PostForm({post}){
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const userData = useSelector((state) => state.userData);
+    const userData = useSelector((state) => state.user.userData);
 
     const submit = async (data) => {
         if (post) {
@@ -41,14 +41,17 @@ function PostForm({post}){
             const file = await service.uploadFile(data.image[0]);
 
             if (file) {
-                const fileId = file.$id;
-                data.featuredImage = fileId;
-                debugger;
-                const postData = await service.createPost({ ...data, userId: userData.$id });
+                try{
+                    const fileId = file.$id;
+                    data.featuredImage = fileId;
+                    debugger;
+                    //const postData = await service.createPost({ ...data, userId: userData.$id });
 
-                if (postData) {
-                    dispatch(createPost({...postData}));
+                    const postData = await dispatch(createNewPost({...data,userId:userData.$id})).unwrap();
                     navigate(`/post/${postData.$id}`);
+                }
+                catch(err){
+                    console.error('Failed to save the post: ', err);
                 }
             }
         }
