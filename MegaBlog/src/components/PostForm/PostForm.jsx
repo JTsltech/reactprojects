@@ -44,7 +44,6 @@ function PostForm({post}){
                 try{
                     const fileId = file.$id;
                     data.featuredImage = fileId;
-                    debugger;
                     //const postData = await service.createPost({ ...data, userId: userData.$id });
 
                     const postData = await dispatch(createNewPost({...data,userId:userData.$id})).unwrap();
